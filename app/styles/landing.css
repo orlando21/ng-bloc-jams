@@ -38,13 +38,6 @@ body {
      position: relative;
      padding: 2rem;
      text-align: center;
-     opacity: 1;
-     -webkit-transition: all 0.25s ease-in-out;
-     -moz-transition: all 0.25s ease-in-out;
-     transition: all 0.25s ease-in-out;
-     -webkit-transition-delay: 1s;
-     -moz-transition-delay: 1s;
-     transition-delay: 1s;
  }
  
  .point .point-title {
