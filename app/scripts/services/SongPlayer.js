@@ -45,4 +45,5 @@ SongPlayer.pause = function(song) {
 angular
     .module('blocJams')
     .factory('SongPlayer', SongPlayer);
+
  })();
