@@ -36,8 +36,7 @@
         */
         var setSong = function(song) {
             if (currentBuzzObject) {
-                currentBuzzObject.stop();
-                SongPlayer.currentSong.playing = null;
+                stopSong(song);
             }
             
             /**
@@ -66,6 +65,16 @@
             currentBuzzObject.play();
             song.playing = true;
         };
+
+        /**
+        * @function stopSong
+        * @desc Stop selected currentBuzzObject and sets global playing property to null
+        * @param {Object} song
+        */
+        var stopSong = function(song) {
+            currentBuzzObject.stop();
+            song.playing = null;
+        };       
         
         /**
         * @function getSongIndex
@@ -113,14 +122,33 @@
         
         /**
         * @function SongPlayer.previous
-        * @desc Decrements song number of currently playing song
+        * @desc Decrements song number of currently playing song, and plays the previous song
         */
         SongPlayer.previous = function() {
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex--;
             
             if (currentSongIndex < 0) {
-                currentBuzzObject.stop();
+                stopSong(stop);
+                SongPlayer.currentSong.playing = null;
+                }
+            else {
+                var song = currentAlbum.songs[currentSongIndex];
+                setSong(song);
+                playSong(song);
+                }
+            };
+
+        /**
+        * @function SongPlayer.next
+        * @desc Increments song number of currently playing song, and plays the next song
+        */
+        SongPlayer.next = function() {
+            var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+            currentSongIndex++;
+            
+            if (currentSongIndex > (currentAlbum.songs.length - 1)) {
+                stopSong(song);
                 SongPlayer.currentSong.playing = null;
                 }
             else {
