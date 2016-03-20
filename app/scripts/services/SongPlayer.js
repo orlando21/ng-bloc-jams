@@ -71,9 +71,9 @@
         * @desc Stop selected currentBuzzObject and sets global playing property to null
         * @param {Object} song
         */
-        var stopSong = function(song) {
+        var stopSong = function(song) {          
             currentBuzzObject.stop();
-            song.playing = null;
+//            song.playing = null; 
         };       
         
         /**
