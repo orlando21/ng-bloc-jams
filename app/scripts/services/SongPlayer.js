@@ -9,7 +9,7 @@
     * @function SongPlayer
     * @desc Defines functionality for SongPlayer service and private functions setSong(), playSong()
     */
-    function SongPlayer(Fixtures) {
+    function SongPlayer($rootScope, Fixtures) {
         
         /**
         * @desc Empty SongPlayer object
@@ -37,6 +37,7 @@
         var setSong = function(song) {
             if (currentBuzzObject) {
                 stopSong(song);
+                SongPlayer.currentSong.playing = null;
             }
             
             /**
@@ -48,12 +49,29 @@
                 formats: ['mp3'],
                 preload: true
                 });
+ 
+            /**
+            * @bind 
+            * @desc Add an event listener to the Buzz sound object
+            * @param {audio event} timeupdate
+            */
+            currentBuzzObject.bind('timeupdate', function() {
+                $rootScope.$apply(function() {
+                    SongPlayer.currentTime = currentBuzzObject.getTime();
+                    });
+                });
 
             /**
             * @desc Currently playing song
             * @type {Object}
             */
             SongPlayer.currentSong = song;
+            
+            /**
+            * @desc Current playback time (in seconds) of currently playing song
+            * @type {Number}
+            */
+            SongPlayer.currentTime = null;
         };
         
         /**
@@ -157,12 +175,23 @@
                 playSong(song);
                 }
             };
+        
+        /**
+        * @function setCurrentTime
+        * @desc Set current time (in seconds) of currently playing song
+        * @param {Number} time
+        */
+        SongPlayer.setCurrentTime = function(time) {
+            if (currentBuzzObject) {
+                currentBuzzObject.setTime(time);
+                }
+            };
          
         return SongPlayer;
     };
  
 angular
     .module('blocJams')
-    .factory('SongPlayer', SongPlayer);
+    .factory('SongPlayer', ['$rootScope', 'Fixtures', SongPlayer]);
 
 })();
