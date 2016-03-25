@@ -52,12 +52,25 @@
  
             /**
             * @bind 
-            * @desc Add an event listener to the Buzz sound object
+            * @desc Add an event listener to the Buzz sound object to update time
             * @param {audio event} timeupdate
             */
             currentBuzzObject.bind('timeupdate', function() {
                 $rootScope.$apply(function() {
                     SongPlayer.currentTime = currentBuzzObject.getTime();                    
+                    });
+                });
+ 
+            /**
+            * @bind 
+            * @desc Add an event listener to the Buzz sound object to autoplay next song
+            * @param {audio event} ended
+            */
+            currentBuzzObject.bind('ended', function() {
+                $rootScope.$apply(function() {
+                    if ( currentBuzzObject.isEnded() ) {
+                        SongPlayer.next();
+                        }
                     });
                 });
 
