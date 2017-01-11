@@ -6,7 +6,7 @@ Bloc Jams was originally built as a [jQuery application](https://github.com/orla
 
 As with the original app, it allows you to choose among different albums and songs with play, pause, seek, and skip functionality.
 
-For more information and demo see my [portfolio](http://developer.textlogic.ch/portfolio/1-blocjams.html).
+For more information and demo see my [website](http://gregbabb.com/projects/1-blocjams.html).
 
 ## Starting the app
 Bloc Jams runs with a starter application using the `grunt` build tool and `npm`. The easiest way to run the app is to download and install these dependencies. More information can be found in the [starter application](https://github.com/Bloc/bloc-frontend-project-starter) repository.
